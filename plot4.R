@@ -1,5 +1,6 @@
 # libraries
 require(utils)
+require(lubridate)
 
 # download, load data and subset
 fileUrl <- 'https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip'
@@ -20,7 +21,43 @@ if(file.exists('./household_power_consumption.txt')) {
   invisible(file.remove('./household_power_consumption.txt'))
 }
 
-# Make Plot 1
+
+# Create the png
+png('./plot4.png') # default is 480px X 480px
+
+# Split graphic device
+par(mfrow = c(2,2))
+
+# Make Plot 4.1
+with(data, plot(dmy(Date) + hms(Time), as.numeric(Global_active_power), 
+                xlab = '', type = 'l',
+                ylab = 'Global Active Power (kilowatts)'))
+
+# Make Plot 4.2
+with(data, plot(dmy(Date) + hms(Time), as.numeric(Voltage), 
+                xlab = 'datetime', type = 'l',
+                ylab = 'Voltage'))
+
+# Make Plot 4.3
+with(data, plot(dmy(Date) + hms(Time), as.numeric(Sub_metering_1), 
+                xlab = '', type = 'l',
+                ylab = 'Energy sub metering'))
+with(data, lines(dmy(Date) + hms(Time), as.numeric(Sub_metering_2),
+                 col = 'red'))
+with(data, lines(dmy(Date) + hms(Time), as.numeric(Sub_metering_3),
+                 col = 'blue'))
+with(data, legend('topright', legend=c("Sub_metering_1", 
+                                       "Sub_metering_2",
+                                       "Sub_metering_3"),
+                  col=c("black", "red", "blue"), lty = 1, 
+                  box.lty=0, inset = .01))
+
+# Close png file
+dev.off()
+
+
+
+
 
 
 
