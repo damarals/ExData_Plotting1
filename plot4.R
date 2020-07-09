@@ -31,7 +31,7 @@ par(mfrow = c(2,2))
 # Make Plot 4.1
 with(data, plot(dmy(Date) + hms(Time), as.numeric(Global_active_power), 
                 xlab = '', type = 'l',
-                ylab = 'Global Active Power (kilowatts)'))
+                ylab = 'Global Active Power'))
 
 # Make Plot 4.2
 with(data, plot(dmy(Date) + hms(Time), as.numeric(Voltage), 
@@ -52,12 +52,11 @@ with(data, legend('topright', legend=c("Sub_metering_1",
                   col=c("black", "red", "blue"), lty = 1, 
                   box.lty=0, inset = .01))
 
+# Make Plot 4.4
+with(data, plot(dmy(Date) + hms(Time), as.numeric(Global_reactive_power), 
+                xlab = 'datetime', type = 'l', lwd = 1.2,
+                ylab = 'Global_reactive_power'))
+
 # Close png file
 dev.off()
-
-
-
-
-
-
 
